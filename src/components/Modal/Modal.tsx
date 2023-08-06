@@ -2,7 +2,7 @@ import { ModalBackdrop, ModalContent } from './Modal.styled';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useAppDispatch } from '../../redux/hooks';
-import { toggleModal } from '../../redux/modalSlice';
+import { toggleModal } from '../../redux/modal/modalSlice';
 
 const modalRoot: HTMLElement | null = document.querySelector('#modal-root')!;
 

@@ -11,10 +11,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import contactsReducer from './contactsSlice';
-import filterReducer from './filterSlice';
-import modalReducer from './modalSlice';
-import sortReducer from './sortSlice';
+import contactsReducer from './contacts/contactsSlice';
+import filterReducer from './filter/filterSlice';
+import modalReducer from './modal/modalSlice';
+import sortReducer from './sort/sortSlice';
 
 const rootReducer = combineReducers({
   contacts: contactsReducer,

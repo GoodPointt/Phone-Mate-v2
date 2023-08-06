@@ -1,18 +1,17 @@
 import { StyledList, StyledText } from './ContactsList.styled';
 
 import { useAppSelector } from '../../redux/hooks';
-import { INewContact } from '../../common/models';
+import { IContact } from '../../common/models';
 
 import { Filter } from '../Filter/Filter';
 import { ContactsItem } from '../Contact/ContactsItem';
-import { SortTabs } from '../SortTabs/SortTabs';
 
 export const ContactsList = () => {
   const contacts = useAppSelector(state => state.contacts.contacts);
   const filter = useAppSelector(state => state.filter.filter);
   const sort = useAppSelector(state => state.sort.sort);
 
-  const filteredContacts: INewContact[] =
+  const filteredContacts: IContact[] =
     contacts.filter(
       contact =>
         contact.name
@@ -22,23 +21,6 @@ export const ContactsList = () => {
         contact.number.includes(filter.toLowerCase().trim())
     ) || [];
 
-  const favoriteContacts: INewContact[] = contacts.filter(
-    contact => contact.isFavorite
-  );
-
-  if (sort === 'favorite')
-    return (
-      <>
-        <SortTabs />
-        {favoriteContacts.length > 0 && (
-          <StyledList>
-            {favoriteContacts?.map(contact => (
-              <ContactsItem key={contact.id} contact={contact} />
-            ))}
-          </StyledList>
-        )}
-      </>
-    );
   return (
     <>
       <h2>
@@ -50,8 +32,6 @@ export const ContactsList = () => {
         )}
         in your phonebook
       </h2>
-
-      <SortTabs />
 
       {sort === 'all' && contacts.length > 0 && <Filter />}
       {sort === 'all' && filter !== '' ? (

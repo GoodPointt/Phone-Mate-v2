@@ -1,13 +1,13 @@
 import { useAppDispatch } from '../../redux/hooks';
-import { INewContact } from '../../common/models';
-import { changeFilter } from '../../redux/filterSlice';
-import { removeContact } from '../../redux/operations';
+import { IContact } from '../../common/models';
+import { changeFilter } from '../../redux/filter/filterSlice';
+import { removeContact } from '../../redux/contacts/operations';
 import { StyledItem } from './ContactsItem.styled';
 import { Favorite } from '../Favorite/Favorite';
 import { ReactComponent as CallSvg } from '../../img/svg/call.svg';
 
 export interface IContactsItem {
-  contact: INewContact;
+  contact: IContact;
 }
 
 export const ContactsItem: React.FC<IContactsItem> = ({ contact }) => {

@@ -1,7 +1,7 @@
 import { StyledInput } from '../Styled.styled';
 import { ThandleChange } from '../../common/models';
 
-import { changeFilter } from '../../redux/filterSlice';
+import { changeFilter } from '../../redux/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 export const Filter = () => {

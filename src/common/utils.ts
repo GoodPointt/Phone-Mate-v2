@@ -1,8 +1,8 @@
-import { INewContact } from './models';
+import { IContact } from './models';
 
 export const isContactExist = (
-  newContact: INewContact,
-  contactsArr: INewContact[]
+  newContact: IContact,
+  contactsArr: IContact[]
 ): Boolean => {
   return contactsArr?.find(
     contact =>

@@ -3,23 +3,21 @@ import { Formik, ErrorMessage, Form } from 'formik';
 
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from '../../common/formik';
 import { isContactExist } from '../../common/utils';
-import { INewContact } from '../../common/models';
+import { IContact } from '../../common/models';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
-import { changeFilter } from '../../redux/filterSlice';
-import { addContact } from '../../redux/operations';
-import { toggleModal } from '../../redux/modalSlice';
+import { changeFilter } from '../../redux/filter/filterSlice';
+import { addContact } from '../../redux/contacts/operations';
+import { toggleModal } from '../../redux/modal/modalSlice';
 import { ErrorMsg, StyledFormInput } from './ContactForm.styled';
 
 export const ContactForm: React.FC = () => {
   const dispatch = useAppDispatch();
-  const contacts: INewContact[] = useAppSelector(
-    state => state.contacts.contacts
-  );
+  const contacts: IContact[] = useAppSelector(state => state.contacts.contacts);
 
   const handleSubmit = (values: { name: string; number: string }) => {
-    const newContact: INewContact = {
+    const newContact: IContact = {
       name: values.name.toString(),
       number: values.number.toString(),
     };

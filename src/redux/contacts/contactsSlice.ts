@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { INewContact } from '../common/models';
+import { IContact } from '../../common/models';
 import {
   addContact,
   fetchContacts,
   removeContact,
-  toggleFavorite,
+  // toggleFavorite,
 } from './operations';
 import {
   onAddSucces,
-  onFavoriteSucces,
+  // onFavoriteSucces,
   onRemoveSucces,
-} from '../common/toasts';
+} from '../../common/toasts';
 
 interface ContactsState {
-  contacts: INewContact[];
+  contacts: IContact[];
   status: 'loading' | 'resolved' | 'rejected' | '';
   error: null | string;
 }
@@ -35,7 +35,7 @@ const contactsSlice = createSlice({
     },
     [fetchContacts.fulfilled.type]: (
       state,
-      action: PayloadAction<INewContact[]>
+      action: PayloadAction<IContact[]>
     ) => {
       state.status = 'resolved';
       state.error = null;
@@ -49,10 +49,7 @@ const contactsSlice = createSlice({
       state.status = 'loading';
       state.error = null;
     },
-    [addContact.fulfilled.type]: (
-      state,
-      action: PayloadAction<INewContact>
-    ) => {
+    [addContact.fulfilled.type]: (state, action: PayloadAction<IContact>) => {
       state.status = 'resolved';
       state.error = null;
       state.contacts = [...state.contacts, action.payload];
@@ -68,7 +65,7 @@ const contactsSlice = createSlice({
     },
     [removeContact.fulfilled.type]: (
       state,
-      action: PayloadAction<INewContact>
+      action: PayloadAction<IContact>
     ) => {
       state.status = 'resolved';
       state.error = null;
@@ -78,28 +75,6 @@ const contactsSlice = createSlice({
       onRemoveSucces(action.payload.name);
     },
     [removeContact.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.status = 'rejected';
-      state.error = action.payload;
-    },
-    [toggleFavorite.pending.type]: state => {
-      state.status = 'loading';
-      state.error = null;
-    },
-    [toggleFavorite.fulfilled.type]: (
-      state,
-      action: PayloadAction<INewContact>
-    ) => {
-      state.status = 'resolved';
-      state.error = null;
-      state.contacts = state.contacts.map(contact => {
-        if (contact.id === action.payload.id) {
-          contact.isFavorite = !contact.isFavorite;
-          onFavoriteSucces(contact.name, contact.isFavorite);
-        }
-        return contact;
-      });
-    },
-    [toggleFavorite.rejected.type]: (state, action: PayloadAction<string>) => {
       state.status = 'rejected';
       state.error = action.payload;
     },
