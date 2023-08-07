@@ -14,13 +14,13 @@ import {
 import contactsReducer from './contacts/contactsSlice';
 import filterReducer from './filter/filterSlice';
 import modalReducer from './modal/modalSlice';
-import sortReducer from './sort/sortSlice';
+import authReducer from './auth/authSlice';
 
 const rootReducer = combineReducers({
+  auth: authReducer,
   contacts: contactsReducer,
   filter: filterReducer,
   isModalOpen: modalReducer,
-  sort: sortReducer,
 });
 
 const persistConfig = {

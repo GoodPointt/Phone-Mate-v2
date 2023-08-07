@@ -2,6 +2,9 @@ import styled from '@emotion/styled';
 import { Field } from 'formik';
 
 export const ErrorMsg = styled.p`
+  position: absolute;
+  top: 40px;
+  left: 0;
   font-style: italic;
   color: red;
   font-size: 10px;

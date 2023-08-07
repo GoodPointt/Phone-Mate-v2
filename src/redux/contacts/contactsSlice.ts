@@ -4,7 +4,7 @@ import {
   addContact,
   fetchContacts,
   removeContact,
-  // toggleFavorite,
+  editContact,
 } from './operations';
 import {
   onAddSucces,
@@ -77,6 +77,16 @@ const contactsSlice = createSlice({
     [removeContact.rejected.type]: (state, action: PayloadAction<string>) => {
       state.status = 'rejected';
       state.error = action.payload;
+    },
+    [editContact.fulfilled.type]: (state, action: PayloadAction<IContact>) => {
+      state.status = 'resolved';
+      state.contacts = state.contacts.map(contact => {
+        if (contact.id === action.payload.id) {
+          contact.name = action.payload.name;
+          contact.number = action.payload.number;
+        }
+        return contact;
+      });
     },
   },
 });

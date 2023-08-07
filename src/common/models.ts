@@ -6,9 +6,22 @@ export interface IContact {
 
 export interface IUser {
   id?: string | null;
-  name: string | null;
-  email: string | null;
+  name?: string | null;
+  email?: string | null;
   password?: string | null;
+  token?: string | undefined;
+}
+
+export interface IAuthState {
+  user: IUser | null;
+  token: string | null;
+  isLoggedIn: boolean;
+  isRefreshing: boolean;
+}
+
+export interface PrivateRouteProps {
+  component: React.ComponentType<any>;
+  redirectTo?: string;
 }
 
 export type ThandleChange = React.ChangeEvent<HTMLInputElement>;

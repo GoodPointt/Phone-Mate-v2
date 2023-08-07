@@ -1,19 +1,19 @@
 import { StyledList, StyledText } from './ContactsList.styled';
 
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { IContact } from '../../common/models';
 
 import { Filter } from '../Filter/Filter';
 import { ContactsItem } from '../Contact/ContactsItem';
+import { useContacts } from '../../hooks/useContacts';
 
 export const ContactsList = () => {
-  const contacts = useAppSelector(state => state.contacts.contacts);
+  const { contacts } = useContacts();
   const filter = useAppSelector(state => state.filter.filter);
-  const sort = useAppSelector(state => state.sort.sort);
 
   const filteredContacts: IContact[] =
-    contacts.filter(
-      contact =>
+    contacts?.filter(
+      (contact: IContact) =>
         contact.name
           .toLowerCase()
           .trim()
@@ -33,8 +33,8 @@ export const ContactsList = () => {
         in your phonebook
       </h2>
 
-      {sort === 'all' && contacts.length > 0 && <Filter />}
-      {sort === 'all' && filter !== '' ? (
+      {contacts.length > 0 && <Filter />}
+      {filter !== '' ? (
         <>
           <h4>Search result:</h4>
           {filteredContacts.length > 0 ? (
@@ -54,7 +54,7 @@ export const ContactsList = () => {
         </>
       ) : (
         <StyledList>
-          {contacts?.map(contact => (
+          {contacts?.map((contact: IContact) => (
             <ContactsItem key={contact.id} contact={contact} />
           ))}
         </StyledList>

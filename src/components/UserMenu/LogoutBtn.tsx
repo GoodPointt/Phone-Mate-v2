@@ -1,9 +1,13 @@
 import { ReactComponent as LogoutSvg } from '../../img/svg/logout.svg';
 import css from './UserMenu.module.css';
 
-export const LogoutBtn = () => {
+interface LogoutBtnProps {
+  onClick: () => void;
+}
+
+export const LogoutBtn: React.FC<LogoutBtnProps> = ({ onClick }) => {
   return (
-    <button className={css.Btn}>
+    <button onClick={onClick} className={css.Btn}>
       <div className={css.sign}>
         <LogoutSvg />
       </div>

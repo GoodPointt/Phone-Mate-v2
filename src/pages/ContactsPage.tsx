@@ -1,25 +1,18 @@
 import { useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
-import {
-  StyledBtn,
-  StyledCloseBtn,
-  StyledContainer,
-} from '../components/Styled.styled';
+import { StyledBtn, StyledCloseBtn } from '../components/Styled.styled';
 import { ContactForm } from '../components/ContactForm/ContactForm';
 import { ContactsList } from '../components/ContactsList/ContactsList';
 import { Modal } from '../components/Modal/Modal';
-// import { Notification } from '../components/Notification/Notification';
 import { fetchContacts } from '../redux/contacts/operations';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { Loader } from '../components/Loader/Loader';
-// import { onError } from '../common/toasts';
 import { toggleModal } from '../redux/modal/modalSlice';
-// import { GoTop } from '../components/GoTop/GoTop';
-import { UserMenu } from '../components/UserMenu/UserMenu';
+import { useContacts } from '../hooks/useContacts';
 
 export const ContactsPage = () => {
-  const { status, error } = useAppSelector(state => state.contacts);
+  const { status, error } = useContacts();
   const { isModalOpen } = useAppSelector(state => state.isModalOpen);
 
   const dispatch = useAppDispatch();
@@ -28,8 +21,7 @@ export const ContactsPage = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
-    <StyledContainer>
-      <UserMenu />
+    <>
       <h1>Phone Mate</h1>
       <StyledBtn
         className="add"
@@ -40,13 +32,7 @@ export const ContactsPage = () => {
       </StyledBtn>
       {status === 'loading' && !error && <Loader />}
       {status === 'resolved' && <ContactsList />}
-      {/* {status === 'rejected' && error && onError(error) && (
-        <>
-          <h2>Opps! some error occured😒 Try again later.</h2>
-          <h4>{error}</h4>
-        </>
-      )} */}
-      {/* <GoTop /> */}
+
       {isModalOpen && (
         <Modal>
           <StyledCloseBtn type="button" onClick={() => dispatch(toggleModal())}>
@@ -57,7 +43,6 @@ export const ContactsPage = () => {
           <ContactForm />
         </Modal>
       )}
-      {/* <Notification /> */}
-    </StyledContainer>
+    </>
   );
 };

@@ -89,18 +89,35 @@ form {
   opacity: 1;
 }
 
+.user-form-input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #989898;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #989898;
+  outline: none;
+  background: transparent;
+}
+
+.user-form-input:focus {
+  color: #fff;
+  border-color: #fff;
+}
+
 .user-box {
   position: relative;
-  width: 200px;
+  width: 250px;
 }
 
 .user-box .submit__lable {
   position: absolute;
-  top: 0;
+  top: -24px;
   left: 0;
   padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
+  font-size: 10px;
+  color: #8e8d8d93;
   pointer-events: none;
   transition: 0.5s;
 }
@@ -213,4 +230,47 @@ form {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.usermenu-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 320px;
+  margin: 0 auto;
+  padding: 30px 30px 0 30px;
+}
+
+.password-input {
+  -webkit-text-security: disc;
+}
+
+.password-input-safari {
+  -webkit-text-security: circle;
+}
+
+.inputBox {
+  position: relative;
+}
+.inputIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -50px;
+  top: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+.underformText {
+  text-decoration-line: none;
+  color: inherit;
+  text-align: center;
+}
+
+.underformText:hover {
+  color: #fff;
+  text-decoration-color: #5dba61;
 }

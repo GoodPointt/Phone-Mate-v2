@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const StyledItem = styled.li`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
   .card {
     overflow: hidden;
@@ -103,5 +103,40 @@ export const StyledItem = styled.li`
     100% {
       transform: translateY(0px);
     }
+  }
+`;
+
+export const StyledEditInput = styled.input`
+  width: 100%;
+  padding: 0;
+  font-size: 14px;
+  color: #bdb8b8;
+
+  margin-bottom: 5px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+
+  &:focus {
+    color: rgb(176, 210, 255);
+    border-color: rgb(176, 210, 255);
+  }
+`;
+
+export const EditBtn = styled.button`
+  border: none;
+  width: fit-content;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &.edit:hover {
+    box-shadow: 0 0 0.75em 0.25em rgb(20 185 20);
+    background-color: rgb(20 185 20);
+  }
+  &.cancel:hover {
+    box-shadow: 0 0 0.75em 0.25em rgb(185 20 20);
+    background-color: rgb(185 20 20);
   }
 `;

@@ -1,20 +1,27 @@
 import { toast } from 'react-toastify';
 import { Formik, ErrorMessage, Form } from 'formik';
 
-import { INITIAL_VALUES, VALIDATION_SCHEMA } from '../../common/formik';
+import { CONTACT_VALIDATION } from '../../common/formik';
 import { isContactExist } from '../../common/utils';
 import { IContact } from '../../common/models';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 
 import { changeFilter } from '../../redux/filter/filterSlice';
 import { addContact } from '../../redux/contacts/operations';
 import { toggleModal } from '../../redux/modal/modalSlice';
 import { ErrorMsg, StyledFormInput } from './ContactForm.styled';
+import { useContacts } from '../../hooks/useContacts';
 
 export const ContactForm: React.FC = () => {
+  const INITIAL_VALUES = {
+    name: '',
+    number: '',
+  };
+
   const dispatch = useAppDispatch();
-  const contacts: IContact[] = useAppSelector(state => state.contacts.contacts);
+
+  const { contacts } = useContacts();
 
   const handleSubmit = (values: { name: string; number: string }) => {
     const newContact: IContact = {
@@ -33,7 +40,7 @@ export const ContactForm: React.FC = () => {
   return (
     <Formik
       initialValues={INITIAL_VALUES}
-      validationSchema={VALIDATION_SCHEMA}
+      validationSchema={CONTACT_VALIDATION}
       onSubmit={handleSubmit}
     >
       <Form>
