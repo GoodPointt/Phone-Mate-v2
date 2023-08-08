@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { IUser } from '../../common/models';
+import { onError, onLoginError } from '../../common/toasts';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -27,6 +28,7 @@ export const register = createAsyncThunk(
       if (!(error instanceof AxiosError)) {
         throw err;
       }
+      onError('Oops!😒');
       return rejectWithValue(error.response?.data);
     }
   }
@@ -44,6 +46,7 @@ export const logIn = createAsyncThunk(
       if (!(error instanceof AxiosError)) {
         throw err;
       }
+      onLoginError(error.message);
       return rejectWithValue(error.response?.data);
     }
   }
@@ -60,6 +63,7 @@ export const logOut = createAsyncThunk(
       if (!(error instanceof AxiosError)) {
         throw err;
       }
+
       return rejectWithValue(error.response?.data);
     }
   }
@@ -84,6 +88,7 @@ export const refreshUser = createAsyncThunk(
       if (!(error instanceof AxiosError)) {
         throw err;
       }
+
       return rejectWithValue(error.response?.data);
     }
   }

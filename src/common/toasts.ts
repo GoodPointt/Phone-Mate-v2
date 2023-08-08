@@ -10,3 +10,7 @@ export const onRemoveSucces = (contactName: string) => {
 export const onError = (errorMsg: string) => {
   return toast.error(`Opps! Some error occured😒 ${errorMsg}`);
 };
+
+export const onLoginError = (errorMsg: string) => {
+  return toast.error(`User not found or password wrong.  (${errorMsg})`);
+};

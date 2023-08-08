@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const CONTACT_VALIDATION = Yup.object().shape({
   name: Yup.string()
     .matches(
-      /^[a-zA-Z'-\s]+$/,
+      /^[a-zA-Z0-9'-\s]+$/,
       'Name may contain only letters, apostrophe, dash and spaces.'
     )
     .required('Name is required'),

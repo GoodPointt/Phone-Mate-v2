@@ -46,7 +46,7 @@ export const ContactForm: React.FC = () => {
       <Form>
         <div className="user-box">
           <StyledFormInput type="text" name="name" autoFocus />
-          <label className="submit__lable">Username</label>
+          <label className="submit__lable">Contact name</label>
           <ErrorMessage name="name" component={ErrorMsg} />
         </div>
 
