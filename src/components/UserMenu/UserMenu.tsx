@@ -6,8 +6,13 @@ import css from './UserMenu.module.css';
 
 export const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAuth();
+  const { user, isRefreshing } = useAuth();
   const handleLogout = () => dispatch(logOut());
+
+  if (isRefreshing || !user) {
+    return null;
+  }
+
   return (
     <div className={css.usermenu}>
       <p style={{ maxWidth: 100 }}>{user.email}</p>

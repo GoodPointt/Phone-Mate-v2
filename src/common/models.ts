@@ -5,16 +5,17 @@ export interface IContact {
 }
 
 export interface IUser {
+  user?: null | any;
   id?: string | null;
   name?: string | null;
   email?: string | null;
   password?: string | null;
-  token?: string | undefined;
+  token?: string | undefined | null;
 }
 
 export interface IAuthState {
   user: IUser | null;
-  token: string | null;
+  token: string | null | undefined;
   isLoggedIn: boolean;
   isRefreshing: boolean;
 }

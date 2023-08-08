@@ -15,24 +15,28 @@ import contactsReducer from './contacts/contactsSlice';
 import filterReducer from './filter/filterSlice';
 import modalReducer from './modal/modalSlice';
 import authReducer from './auth/authSlice';
+import { IAuthState } from '../common/models';
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
+
+const filterPersistConfig = {
+  key: 'filter',
+  storage,
+};
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: persistReducer<IAuthState>(authPersistConfig, authReducer),
   contacts: contactsReducer,
-  filter: filterReducer,
+  filter: persistReducer(filterPersistConfig, filterReducer),
   isModalOpen: modalReducer,
 });
 
-const persistConfig = {
-  key: 'PHONE_MATE_KEY',
-  storage,
-  blacklist: ['contacts'],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

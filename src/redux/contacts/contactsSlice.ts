@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { IContact } from '../../common/models';
 import {
   addContact,
@@ -6,16 +6,11 @@ import {
   removeContact,
   editContact,
 } from './operations';
-import {
-  onAddSucces,
-  // onFavoriteSucces,
-  onRemoveSucces,
-} from '../../common/toasts';
 
 interface ContactsState {
   contacts: IContact[];
   status: 'loading' | 'resolved' | 'rejected' | '';
-  error: null | string;
+  error: null | string | unknown;
 }
 
 const initialState: ContactsState = {
@@ -28,66 +23,59 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchContacts.pending.type]: state => {
-      state.status = 'loading';
-      state.error = null;
-    },
-    [fetchContacts.fulfilled.type]: (
-      state,
-      action: PayloadAction<IContact[]>
-    ) => {
-      state.status = 'resolved';
-      state.error = null;
-      state.contacts = action.payload;
-    },
-    [fetchContacts.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.status = 'rejected';
-      state.error = action.payload;
-    },
-    [addContact.pending.type]: state => {
-      state.status = 'loading';
-      state.error = null;
-    },
-    [addContact.fulfilled.type]: (state, action: PayloadAction<IContact>) => {
-      state.status = 'resolved';
-      state.error = null;
-      state.contacts = [...state.contacts, action.payload];
-      onAddSucces(action.payload.name);
-    },
-    [addContact.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.status = 'rejected';
-      state.error = action.payload;
-    },
-    [removeContact.pending.type]: state => {
-      state.status = 'loading';
-      state.error = null;
-    },
-    [removeContact.fulfilled.type]: (
-      state,
-      action: PayloadAction<IContact>
-    ) => {
-      state.status = 'resolved';
-      state.error = null;
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload.id
-      );
-      onRemoveSucces(action.payload.name);
-    },
-    [removeContact.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.status = 'rejected';
-      state.error = action.payload;
-    },
-    [editContact.fulfilled.type]: (state, action: PayloadAction<IContact>) => {
-      state.status = 'resolved';
-      state.contacts = state.contacts.map(contact => {
-        if (contact.id === action.payload.id) {
-          contact.name = action.payload.name;
-          contact.number = action.payload.number;
-        }
-        return contact;
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.error = null;
+        state.contacts = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload;
+      })
+      .addCase(addContact.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.error = null;
+        state.contacts = [action.payload, ...state.contacts];
+      })
+      .addCase(addContact.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload;
+      })
+      .addCase(removeContact.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(removeContact.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.error = null;
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== action.payload.id
+        );
+      })
+      .addCase(removeContact.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload;
+      })
+      .addCase(editContact.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.contacts = state.contacts.map(contact => {
+          if (contact.id === action.payload.id) {
+            contact.name = action.payload.name;
+            contact.number = action.payload.number;
+          }
+          return contact;
+        });
       });
-    },
   },
 });
 

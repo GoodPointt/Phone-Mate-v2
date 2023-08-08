@@ -9,15 +9,17 @@ import { HomePage } from '../pages/HomePage';
 import { useAppDispatch } from '../hooks/hooks';
 import { useEffect } from 'react';
 import { refreshUser } from '../redux/auth/operations';
+import { useAuth } from '../hooks/useAuth';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? null : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />

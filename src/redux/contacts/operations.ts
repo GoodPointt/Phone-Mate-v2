@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { IContact } from '../../common/models';
+import { onAddSucces, onRemoveSucces } from '../../common/toasts';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
@@ -23,6 +24,7 @@ export const addContact = createAsyncThunk(
   async (newContact: IContact, { rejectWithValue }) => {
     try {
       const response = await axios.post<IContact>('/contacts', newContact);
+      onAddSucces(response.data.name);
       return response.data;
     } catch (err) {
       const error = err as unknown;
@@ -39,6 +41,8 @@ export const removeContact = createAsyncThunk(
   async (contactId: string, { rejectWithValue }) => {
     try {
       const response = await axios.delete<IContact>(`/contacts/${contactId}`);
+      onRemoveSucces(response.data.name);
+
       return response.data;
     } catch (err) {
       const error = err as unknown;

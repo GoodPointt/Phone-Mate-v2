@@ -53,7 +53,11 @@ export const LoginPage = () => {
           </div>
 
           <div className="user-box">
-            <StyledFormInput type="password" name="password" />
+            <StyledFormInput
+              type="password"
+              name="password"
+              autocomplite="current-password"
+            />
             <ErrorMessage name="password" component={ErrorMsg} />
             <label className="submit__lable">Password</label>
           </div>
