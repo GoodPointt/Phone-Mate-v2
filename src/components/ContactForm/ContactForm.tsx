@@ -45,13 +45,18 @@ export const ContactForm: React.FC = () => {
     >
       <Form>
         <div className="user-box">
-          <StyledFormInput type="text" name="name" autoFocus />
+          <StyledFormInput
+            type="text"
+            name="name"
+            autoFocus
+            autoComplete="off"
+          />
           <label className="submit__lable">Contact name</label>
           <ErrorMessage name="name" component={ErrorMsg} />
         </div>
 
         <div className="user-box">
-          <StyledFormInput type="tel" name="number" />
+          <StyledFormInput type="tel" name="number" autoComplete="off" />
           <ErrorMessage name="number" component={ErrorMsg} />
           <label className="submit__lable">Phone number</label>
         </div>

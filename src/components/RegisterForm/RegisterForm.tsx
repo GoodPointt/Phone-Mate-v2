@@ -55,13 +55,13 @@ export const RegisterForm = () => {
     >
       <Form>
         <div className="user-box">
-          <StyledFormInput type="name" name="name" />
+          <StyledFormInput type="name" name="name" autoComplete="username" />
           <label className="submit__lable">Username</label>
           <ErrorMessage name="name" component={ErrorMsg} />
         </div>
 
         <div className="user-box">
-          <StyledFormInput type="email" name="email" />
+          <StyledFormInput type="email" name="email" autoComplete="email" />
           <label className="submit__lable">E-mail</label>
           <ErrorMessage name="email" component={ErrorMsg} />
         </div>
@@ -70,7 +70,7 @@ export const RegisterForm = () => {
           <StyledFormInput
             type={showPassword ? 'text' : 'password'}
             name="password"
-            autocomplite="current-password"
+            autoComplete="new-password"
           />
           <ErrorMessage name="password" component={ErrorMsg} />
           <label className="submit__lable">Password</label>
@@ -83,7 +83,7 @@ export const RegisterForm = () => {
 
         <center>
           <button className="submit-btn" type="submit">
-            Sign in<span></span>
+            Sign up<span></span>
           </button>
         </center>
       </Form>

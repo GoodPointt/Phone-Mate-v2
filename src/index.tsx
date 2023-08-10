@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { App } from './components/App';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import store, { persistor } from './redux/store';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +15,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/goit-react-hw-08-phonebook">
+        <BrowserRouter basename="/Phone-Mate-v2">
           <App />
         </BrowserRouter>
       </PersistGate>

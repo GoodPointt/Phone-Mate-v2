@@ -131,6 +131,10 @@ export const EditBtn = styled.button`
   color: inherit;
   cursor: pointer;
 
+  &:hover {
+    color: #000;
+  }
+
   &.edit:hover {
     box-shadow: 0 0 0.75em 0.25em rgb(20 185 20);
     background-color: rgb(20 185 20);

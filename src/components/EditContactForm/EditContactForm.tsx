@@ -42,6 +42,7 @@ export const EditContactForm: React.FC<IEditForm> = ({
           type="text"
           value={editedName}
           onChange={e => setEditedName(e.target.value)}
+          autoComplete="off"
         />
       </div>
       <div className="inputBox">
@@ -52,6 +53,7 @@ export const EditContactForm: React.FC<IEditForm> = ({
           type="text"
           value={editedNumber}
           onChange={e => setEditedNumber(e.target.value)}
+          autoComplete="off"
         />
       </div>
       <div
@@ -61,7 +63,7 @@ export const EditContactForm: React.FC<IEditForm> = ({
         }}
       >
         <EditBtn className="edit" type="submit">
-          Edit
+          Confirm
         </EditBtn>
         <EditBtn className="cancel" type="button" onClick={toggleEditMode}>
           Cancel

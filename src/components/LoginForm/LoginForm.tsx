@@ -47,7 +47,7 @@ export const LoginForm = () => {
     >
       <Form>
         <div className="user-box">
-          <StyledFormInput type="email" name="email" />
+          <StyledFormInput type="email" name="email" autoComplete="email" />
           <label className="submit__lable">E-mail</label>
           <ErrorMessage name="email" component={ErrorMsg} />
         </div>
